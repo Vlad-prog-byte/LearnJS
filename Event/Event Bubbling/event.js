@@ -1,18 +1,32 @@
-const colors = ["blue", "yellow", "green", "black", "grey", 'pink'];
+console.log(7);
 
-const div_1 = document.getElementsByClassName('DIV1');
-div_1[0].addEventListener('click', (event) => {console.log(event.currentTarget.className)});
+const html = document.documentElement;
+const body = document.body;
+const div = document.querySelector('div');
+const ul = document.querySelector('ul');
+const li = document.querySelector('li');
+let pause = 200;
 
-const div_2 = document.getElementsByClassName('DIV2');
-div_2[0].addEventListener('click', (event) => {console.log(event.currentTarget.className)});
+html.addEventListener('click', callback);
+body.addEventListener('click', callback);
+div.addEventListener('click', callback);
+ul.addEventListener('click', callback);
+li.addEventListener('click', callback);
 
-const div_3 = document.getElementsByClassName('DIV3');
-div_3[0].addEventListener('click', (event) => {console.log(event.currentTarget.className)});
+html.addEventListener('click', callback, true);
+body.addEventListener('click', callback, true);
+div.addEventListener('click', callback, true);
+ul.addEventListener('click', callback, true);
+li.addEventListener('click', callback, true);
 
-const div_4 = document.getElementsByClassName('DIV4');
-div_4[0].addEventListener('click', (event) => {console.log(event.currentTarget.className)});
-
-const div_5 = document.getElementsByClassName('DIV5');
-div_5[0].addEventListener('click', (event) => {console.log(event.currentTarget.className);}, true);
-
-
+function callback(event) {
+    var ms = event.timeout = (event.timeout + pause) || 0;
+    var target = event.currentTarget;
+    
+    setTimeout(function() {
+      target.classList.add('highlight');
+      setTimeout(function() {
+        target.classList.remove('highlight');
+      }, pause);
+    }, ms);
+  }
